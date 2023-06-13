@@ -6,7 +6,7 @@ RSpec.describe Comment, type: :model do
     let!(:post) do
       Post.create(author: user1, title: 'Hello', text: 'This is my first post', likes_counter: 5, comments_counter: 5)
     end
-    let!(:comment) { Comment.create(id: user1.id, post_id: post.id, text: 'Greetings Tom!') }
+    let!(:comment) { Comment.create(user_id: user1.id, post_id: post.id, text: 'Greetings Tom!') }
 
     it 'increments comments_counter by 1' do
       puts "Before: #{post.comments_counter}"

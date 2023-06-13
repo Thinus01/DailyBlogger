@@ -15,7 +15,7 @@ RSpec.describe Like, type: :model do
       likes_counter: 5,
       comments_counter: 5
     )
-    like = Like.create(post_id: post.id)
+    like = Like.create(post, user1.id)
 
     like.update_likes_counter
     check = post.reload.likes_counter
