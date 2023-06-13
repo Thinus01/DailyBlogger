@@ -18,6 +18,10 @@
   color: black;
 }
 
+.users-link {
+  width: 100%;
+}
+
 .user {
   display: flex;
   justify-content: space-between;
