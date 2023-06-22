@@ -13,231 +13,152 @@
  *= require_tree .
  *= require_self
  */
-
-body {
-  font-family: Helvetica, Geneva, Arial, sans-serif;
-  font-size: small;
-  color: #000;
-  background-color: #fff;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 a {
   text-decoration: none;
+  color: black;
 }
 
-a:visited {
-  color: inherit;
-}
-
-.a:hover {
-  cursor: pointer;
-}
-
-ul {
-  list-style: none;
-}
-
-.container {
-  width: 70%;
-  margin: 0 auto;
-  padding: 0 20px;
+.usersContainer {
   display: flex;
   flex-direction: column;
 }
 
-.user {
+.mainContainer {
+  padding: 24px;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: 95%;
-  margin: 10px 0;
-  padding: 1em 3em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.user-image {
-  width: 100px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.user-detail {
+.userPostDiv {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
+  padding: 20px;
+  border: solid 2px black;
   width: 100%;
 }
 
-.user-name {
-  font-size: 2em;
-  font-weight: bold;
-  padding: 0 5em;
+.userPostTopDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 20px;
 }
 
-.post-no {
-  font-size: 1em;
+.commentsDiv {
+  padding: 24px;
+  border: 2px solid black;
+  width: 100%;
+}
+
+.userCard {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-bottom: 5px;
+}
+
+.userCardLeft {
+  height: 100px;
+  width: 100px;
+  flex: 1;
+  border: solid 1px black;
+}
+
+.userCardRight {
+  flex: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: solid 1px black;
+  padding: 0 20px;
+}
+
+.userDetailsSection {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.post-container {
+  margin-left: 35%;
+}
+
+.post-section {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px black;
+  padding: 20px;
+}
+
+.recentPosts {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+}
+
+.singlePost {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border: solid 1px black;
+  padding: 10px;
+}
+
+.seeAllPosts {
+  margin: 10px;
+  align-self: center;
+}
+
+.counterSection {
   align-self: flex-end;
 }
 
-.user-bio {
-  margin: 10px 0;
-  padding: 1em 3em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1.5em;
+.postComments {
+  border: solid 1px black;
+  padding: 10px;
+  margin: 10px;
 }
 
-h5 {
-  font-size: 0.8em;
-}
-
-.user-posts {
-  margin: 10px 0;
-  padding: 0.5em 2em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.inputs {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  width: 50%;
+  gap: 5px;
 }
 
-.post {
-  margin: 10px 0;
-  padding: 1em 3em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.post p,
-.post-body {
-  font-size: 1.5em;
-}
-
-.post ul,
-.post-head ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 2em;
-}
-
-button,
-.btn {
-  padding: 0.5em 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #000;
-  color: #fff;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-.post-with-comments {
+.devise {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 0.5em 0.5em;
-  margin: 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 50%;
+  padding: 0 120px 100px;
+  margin: 0 auto;
 }
 
-.comments {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0.5em 0.5em;
-  margin: 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.comment {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 2em;
-  margin: 0;
-}
-
-.post-detail {
-  margin: 10px 0;
-  padding: 0.5em 2em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.post-head {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 2em;
-}
-
-.post-head h5 {
-  font-size: 1.5em;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 2em;
-  margin: 10px 0;
-  padding: 0.5em 2em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding-left: 20%;
-}
-
-label {
-  font-size: 1.5em;
-  margin: 0 1em;
-}
-
-input {
-  padding: 0.5em 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1.5em;
-  width: 70%;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 2em;
-  margin: 1em 0;
-}
-
-textarea {
-  padding: 0.5em 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1.5em;
-}
-
-.btn {
-  align-self: flex-end;
-}
-
-.alert {
-  padding: 0.5em 1em;
-  color: red;
-  font-size: 1em;
-}
-
-.like-form form {
-  border: none;
-  padding: 0;
-}
-
-.like-form input {
-  padding: 0.5em 5em;
+.devise input[type=email],
+.devise input[type=password],
+.devise input[type=text] {
+  width: 100%;
+  height: 25px;
+  padding: 4px;
+  margin-bottom: 8px;
 }
