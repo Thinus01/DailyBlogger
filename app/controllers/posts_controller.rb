@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
+
   def index
     @user = User.includes(:posts).find(params[:user_id])
     @posts = @user.posts.includes(:comments)
@@ -30,6 +32,11 @@ class PostsController < ApplicationController
     @comment.post = Post.find(params[:id])
     @comment.author_id = current_user.id
     redirect_to user_post_path if @comment.save
+  end
+
+  def destroy
+    Post.delete(params[:id])
+    redirect_to user_posts_path
   end
 
   def create_like

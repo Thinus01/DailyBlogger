@@ -6,8 +6,15 @@ class CommentsController < ApplicationController
     redirect_to user_post_path(id: @comment.post_id) if @comment.save
   end
 
-  def new
-    @comment = Comment.new
+  def destroy
+    @comment = Comment.find(params[:id])
+    if current_user.admin? || current_user.id == @comment.author_id
+      @comment.destroy
+      flash[:success] = 'Comment deleted successfully.'
+    else
+      flash[:error] = 'You are not authorized to delete this comment.'
+    end
+    redirect_to user_post_path(@user, params[:post_id])
   end
 
   private

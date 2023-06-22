@@ -6,7 +6,9 @@
       <span>Likes: <%= post.likes_counter %></span>
     </aside>
   </div>
-
+  <%if can? :destroy, @post%>
+    <%= button_to "Delete A Post", user_post_path(@post.author_id, @post.id), method: :delete, data: {turbo: false}%>
+  <%end%>
   <% puts "*******************************************"%>
   <% puts @like_user%>
   <% puts "**************************************"%>
