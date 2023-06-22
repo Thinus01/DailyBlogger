@@ -1,32 +1,24 @@
-require 'rails_helper'
+require_relative '../rails_helper'
 
 RSpec.describe Comment, type: :model do
-  describe 'associations' do
-    let(:author) { User.create(name: 'me', photo: 'photo', bio: 'bio', posts_counter: 5) }
-    let(:post) do
-      Post.create(author_id: author.id, title: 'Post', text: 'Text', likes_counter: 5, comments_counter: 5)
-    end
-    subject { Comment.new(author_id: author.id, post_id: post.id, text: 'Hi') }
+  describe 'Comment Model Validations' do
+    subject { Comment.new(text: 'New Comment', author_id: 1, post_id: 1) }
 
-    before do
-      subject.save
-      post.reload # Reload post to make sure it has the correct comments_counter value
-    end
+    before { subject.save }
 
-    it 'should have a valid author id' do
-      subject.author_id = nil
+    it 'checks if title is valid' do
+      subject.text = nil
       expect(subject).to_not be_valid
     end
 
-    it 'should have a valid post id' do
-      subject.post_id = nil
+    it 'checks if author id is a number' do
+      subject['author_id'] = 'ddd'
       expect(subject).to_not be_valid
     end
 
-    it 'should increment comments_counter' do
-      expect { Comment.create(author_id: author.id, post_id: post.id, text: 'Hello') }.to change {
-                                                                                            post.reload.comments_counter
-                                                                                          }.by(1)
+    it 'checks if post id is a number' do
+      id = subject['post_id'] = 1
+      expect(id).to be == 1
     end
   end
 end

@@ -1,0 +1,17 @@
+<div class="userPostDiv">
+  <div class = 'userPostTopDiv'>
+    <h4> <%= post.title %> by <%= post.user.name %> </h4>
+    <aside>
+      <span>Comments: <%= post.comments_counter %></span>
+      <span>Likes: <%= post.likes_counter %></span>
+    </aside>
+  </div>
+
+  <% puts "*******************************************"%>
+  <% puts @like_user%>
+  <% puts "**************************************"%>
+  <p><%= post.text %></p>
+  <%= form_with model: @like, url: user_post_likes_path(author_id: @like_user.id, post_id: post.id), method: :post do |f| %>
+    <%= f.submit "Like" %>
+  <% end %>
+</div>

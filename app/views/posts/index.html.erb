@@ -1,19 +1,27 @@
-<div class="container">
-    <h1>Posts List</h1>
-    <%= render partial: "/shared/user", locals: { user: @user } %>
-    <div class="user-posts">
-        <% @posts.each.with_index(1) do |post, index| %>
-            <div class="post-with-comments">
-            <a href="/users<%= @user.id %>/posts<%= post.id %>">
-                <%= render partial: "/shared/post", locals: { post: post, index: index } %>
-            </a>
-                <div class="comments">
-                    <% post.recent_comments.each do |comment| %>
-                        <%= render partial: "/shared/comment", locals: { comment: comment } %>
-                    <% end %>
-                </div>
+<div class="post-section">
+  <% content_for :title, "#{@user.name}'s Posts" %>
+  <%= render "users/user", user: @user %>
+  <% @user.posts.each do | post | %>
+    <%= link_to user_post_path(@user, post) do %>
+      <%= render "post", post: post %>
+
+      <div>
+        <h4>
+          <span>Comments</span>
+          <span>for Post: </span>
+          <span><%="#{post.title}"%> </span>
+        </h4>
+        <div class='postComments'>
+          <% post.recent_comments.each do |comment| %>
+            <div>
+              <p>
+                <span><strong><%= comment.user.name%>:</strong></span>
+                <span><%= comment.text %></span>
+              </p>
             </div>
-        <% end %>
-        <button class="btn btn-primary">More Posts</button>
-    </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>

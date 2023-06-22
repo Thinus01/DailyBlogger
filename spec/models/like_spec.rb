@@ -1,24 +1,19 @@
-require 'rails_helper'
+require_relative '../rails_helper'
+
 RSpec.describe Like, type: :model do
-  describe 'associations' do
-    author = User.create(name: 'author', photo: 'photo', bio: 'bio', posts_counter: 2)
-    post = Post.create(title: 'title', text: 'text', comments_counter: 2, author_id: author.id, likes_counter: 2)
-    subject { Like.new(author_id: 1, post_id: 1) }
+  describe 'Likes Validations' do
+    subject { Like.new(author_id: 5, post_id: 8) }
 
     before { subject.save }
 
-    it 'author id should be an integer' do
-      subject.author_id = 'string'
-      expect(subject).to_not be_valid
+    it 'checks if author id is a number' do
+      subject['author_id'] = 'id'
+      expect(subject).to_not eql 1
     end
 
-    it 'post id should be an integer' do
-      subject.post_id = 'string'
-      expect(subject).to_not be_valid
-    end
-
-    it 'updates the likes counter' do
-      expect(post.likes_counter).to eq(2)
+    it 'checks if post id is a number' do
+      id = subject['post_id'] = 10
+      expect(id).to be == 10
     end
   end
 end

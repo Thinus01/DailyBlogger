@@ -1,43 +1,49 @@
 class PostsController < ApplicationController
   def index
     @user = User.includes(:posts).find(params[:user_id])
-    @posts = @user.posts.order(created_at: :desc)
+    @posts = @user.posts.includes(:comments)
   end
 
   def show
-    @post = Post.includes(:comments, :likes).where(author_id: params[:user_id]).find(params[:id])
     @user = User.find(params[:user_id])
-    comment = Comment.new
-    like = Like.new
-    respond_to do |format|
-      format.html { render :show, locals: { comment:, like: } }
-    end
-  end
-
-  def new
-    new_post = Post.new
-    respond_to do |format|
-      format.html { render :new, locals: { post: new_post } }
-    end
+    @post = Post.find(params[:id])
+    @like_user = User.first
+    @comments = @post.comments.includes(:user)
   end
 
   def create
-    post_params = params.require(:new_post).permit(:title, :text)
-    post = Post.new(post_params)
-    post.author = current_user
-    post.comments_counter = 0
-    post.likes_counter = 0
-    respond_to do |format|
-      format.html do
-        if post.save
-          flash[:notice] = 'Post created successfully'
-          redirect_to users_path
-        else
-          Rails.logger.error(post.errors.full_messages)
-          flash.now[:alert] = 'Post creation failed'
-          render :new, locals: { post: }
-        end
-      end
-    end
+    @post = Post.new(post_params)
+    @post.author_id = current_user.id
+    @post.likes_counter = 0
+    @post.comments_counter = 0
+    return unless @post.save
+
+    redirect_to user_posts_path
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def create_comment
+    @comment = Comment.new(comment_params)
+    @comment.post = Post.find(params[:id])
+    @comment.author_id = current_user.id
+    redirect_to user_post_path if @comment.save
+  end
+
+  def create_like
+    @like = Like.new(author_id: current_user.id, post: Post.find(params[:id]))
+    redirect_to user_post_path if @like.save
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :text)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:text)
   end
 end
