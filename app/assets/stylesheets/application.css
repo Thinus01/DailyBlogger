@@ -192,6 +192,7 @@ form {
   padding: 0.5em 2em;
   border: 1px solid #ccc;
   border-radius: 5px;
+  padding-left: 20%;
 }
 
 label {
