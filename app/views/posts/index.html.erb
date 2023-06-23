@@ -19,6 +19,9 @@
                 <span><%= comment.text %></span>
               </p>
             </div>
+            <%if can? :destroy, comment%>
+            <%= button_to "Delete Comment", user_post_comment_path(@user, post, comment), method: :delete, data: { turbo: false } %>
+            <%end%>
           <% end %>
         </div>
       </div>

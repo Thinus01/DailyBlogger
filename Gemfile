@@ -10,15 +10,13 @@ gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
 gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
+gem 'active_model_serializers', '~> 0.10.2'
 gem 'pg', '~> 1.1'
 
-gem 'devise'
-
-gem 'letter_opener'
-
 # Use the Puma web server [https://github.com/puma/puma]
+gem 'cancancan'
+gem 'devise'
 gem 'puma', '~> 5.0'
-
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 
@@ -54,12 +52,6 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
-end
-
-group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem 'web-console'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -75,6 +67,8 @@ group :test do
   gem 'webdrivers'
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+end
+
 gem 'rails-controller-testing'
-gem 'rspec-rails'
-gem 'rubocop', '>= 1.0', '< 2.0'
