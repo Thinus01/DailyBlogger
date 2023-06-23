@@ -8,4 +8,11 @@ Rails.application.routes.draw do
       resources :comments, only: [:index, :create, :new, :destroy]
     end
   end
+  namespace :api do
+    namespace :v1 do
+      get "users/:id", to: "users#user_posts"
+      get "users/:id/:post_id", to: "users#post_comments"
+      post "users/:id/:post_id", to: "users#create_comments"
+    end
+  end
 end
