@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource only: [:destroy]
 
   def index
     @user = User.includes(:posts).find(params[:user_id])
